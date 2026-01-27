@@ -1,0 +1,42 @@
+name: Update signed status.json
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  sign-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Save private key to file
+        run: |
+          mkdir -p .secrets
+          echo "$PRIVATE_KEY" > .secrets/private.pem
+        env:
+          PRIVATE_KEY: ${{ secrets.SIGNING_PRIVATE_KEY }}
+
+      - name: Generate signed status.json
+        run: node .github/scripts/sign-status.mjs
+        env:
+          PRIVATE_KEY_PATH: .secrets/private.pem
+
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add status.json
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: auto-update signed status.json"
+            git push
+          else
+            echo "No changes"
+          fi
