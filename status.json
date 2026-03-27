@@ -1,6 +1,8 @@
 {
   "status": "active",
-  "timestamp": 1774627749373,
-  "signature": "+CJ/1ZeFCv032LBUp/88Nf6UoFVsOmU7Wm1wJa/jslMiAQm3xz+IXCVbZdbTD4YJpSqHLWeadhFyGJ0a/owfBg==",
-  "uniSignature": "M4neB4oXaB4dCsOxKZWMQtto6Zeiru+FR1ZVtftIFU4LfPJJ5eWjoYj4KceAtE75L8okfzGhpw1zmbAStaTTAQ=="
+  "timestamp": 1774643540340,
+  "discord": false,
+  "seven": false,
+  "signature": "Z6c3mY0+hJTym48GKLnwFEGIARgfRVHhi7sZzH2EaLZqXSPdHCx3dJ7APExeX86OGmn3MuDs7zkLvClizSYJCA==",
+  "uniSignature": "RXOfW/YKNVHEZa+ND3PpuEp82VpFgdkodq+58vjhEgepPEHt0TIEse65BlRdKHXeb/Yia5kRE8lEYqBVlDZfBA=="
 }
