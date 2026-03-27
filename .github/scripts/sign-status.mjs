@@ -1,20 +1,25 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { sign } from 'node:crypto';
 
-const statusData = {
+const baseData = {
   status: "active",
   timestamp: Date.now(),
 }
 
-const payload = JSON.stringify(statusData, null, 0);
+const extendedData = {
+  ...baseData,
+  discord: false,
+  seven: false
+}
 
-const [signature, uniSignature] = [process.env.APP_PRIVATE_KEY_PATH, process.env.UNI_PRIVATE_KEY_PATH].map(path =>
-  sign(null, Buffer.from(payload), readFileSync(path, 'utf8'))
-  .toString('base64')
-);
+const basePayload = JSON.stringify(baseData, null, 0);
+const extendedPayload = JSON.stringify(extendedData, null, 0);
+
+const signature = sign(null, Buffer.from(basePayload), readFileSync(process.env.APP_PRIVATE_KEY_PATH, 'utf8')).toString('base64');
+const uniSignature = sign(null, Buffer.from(extendedPayload), readFileSync(process.env.UNI_PRIVATE_KEY_PATH, 'utf8')).toString('base64');
 
 const signedStatus = {
-  ...statusData,
+  ...extendedData,
   signature,
   uniSignature,
 }
