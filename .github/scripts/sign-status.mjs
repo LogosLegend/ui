@@ -8,7 +8,7 @@ const baseData = {
 
 const extendedData = {
   ...baseData,
-  discord: false,
+  discord: true,
   seven: false
 }
 
