@@ -1,9 +1,9 @@
 name: Update signed status.json
 
 on:
-  schedule:
-    - cron: '23 3 * * *'
-    - cron: '23 15 * * *'
+  #schedule:
+  #  - cron: '23 3 * * *'
+  #  - cron: '23 15 * * *'
   workflow_dispatch:
 
 jobs:
